@@ -22,10 +22,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Generate iOS App Bundle
+      - name: Export Expo Bundle
         run: |
-          mkdir -p ios/Payload
-          npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/Payload/main.jsbundle --assets-dest ios/Payload
+          mkdir -p ios/Payload/FreshAI.app
+          npx expo export --platform ios --output-dir ios/Payload/FreshAI.app
 
       - name: Create IPA Package
         run: |
