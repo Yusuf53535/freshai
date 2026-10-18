@@ -21,11 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
-        with:
-          expo-version: latest
-          eas-version: latest
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
       - name: Build Local iOS
-        run: npx eas-cli build --platform ios --profile development --local --non-interactive
+        run: npx eas build --platform ios --profile development --local --non-interactive
