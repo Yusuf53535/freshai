@@ -24,6 +24,11 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
+      - name: Configure EAS Project
+        run: npx eas init --id "" --force --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
       - name: Build Local iOS
         run: npx eas build --platform ios --profile preview --local --non-interactive
         env:
