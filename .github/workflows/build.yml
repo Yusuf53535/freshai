@@ -26,3 +26,5 @@ jobs:
 
       - name: Build Local iOS
         run: npx eas build --platform ios --profile development --local --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
