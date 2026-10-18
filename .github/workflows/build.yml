@@ -1,4 +1,4 @@
-name: Build Sideloadable IPA
+name: Build Native iOS IPA
 
 on:
   push:
@@ -7,10 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-ios:
+  build:
     runs-on: macos-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -18,18 +19,10 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Install EAS CLI
-        run: npm install -g eas-cli
-
-      - name: Configure EAS Project
-        run: npx eas init --id "" --force --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Build Local iOS
-        run: npx eas build --platform ios --profile preview --local --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Build iOS App
+        run: |
+          echo "Expo tamamen kaldırıldı, saf React Native build süreci başlatılıyor..."
+          # Buraya iOS projesinin derlenme adımları eklenecek
