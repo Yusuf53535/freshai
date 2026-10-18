@@ -12,17 +12,28 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build iOS App
+      - name: Generate iOS App Bundle
         run: |
-          echo "Expo tamamen kaldırıldı, saf React Native build süreci başlatılıyor..."
-          # Buraya iOS projesinin derlenme adımları eklenecek
+          mkdir -p ios/Payload
+          npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/Payload/main.jsbundle --assets-dest ios/Payload
+
+      - name: Create IPA Package
+        run: |
+          cd ios
+          zip -r FreshAI.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FreshAI-IPA
+          path: ios/FreshAI.ipa
